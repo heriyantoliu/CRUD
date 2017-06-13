@@ -1,0 +1,126 @@
+{
+	"_version": "1.1.0",
+	"sap.app": {
+		"_version": "1.1.0",
+		"id": "com.liu.split",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"ach": "CA-UI5-FST",
+		"dataSources": {			
+			"Flight":{
+				"uri": "proxy/http/npggpdbsdev02.terbanggi.ggp:1080/sap/opu/odata/sap/ZAP_FLIGHT_DEMO_ODATA_SRV/",
+				"type": "OData",
+				"settings": {
+					 "odataVersion": "2.0"					 
+				}				
+			}
+		}
+	},
+	"sap.ui": {
+		"_version": "1.1.0",
+		"technology": "UI5",
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_belize"
+		]
+	},
+	"sap.ui5": {
+		"_version": "1.1.0",
+		"rootView": "com.liu.CRUD.view.App",
+		"dependencies": {
+			"minUI5Version": "1.30",
+			"libs": {
+				"sap.m": {
+					
+				}
+			}
+		},
+		"resourceRoots": {
+            "com.mitchbarry.controls": "./control"
+        },
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "com.liu.CRUD.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "Flight",				
+				"settings":{
+					"defaultBindingMode": "TwoWay",
+					"useBatch":true,					
+					"serviceUrlParams": {
+	        		 	"sap-client": "370"	        		 	
+	         		 },
+	         		 "metadataUrlParams":{
+	         		 	"sap-client": "370"	         		 	
+	         		 },
+	         		 "user":"GGP-09936",
+	         		 "password":"google"	         		 	         											 	         		          		 
+				}				
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "com.liu.CRUD.view",							
+				"transition": "slide",		
+				"controlId": "app",
+				"controlAggregation": "pages",					
+				"bypassed":{
+					"target": "notFound"					
+				}
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "app",
+					"target": "app"
+				},
+				{
+					"pattern": "detail/{carrId}",
+					"name": "detail",
+					"target": "detail"
+				},
+				{
+					"pattern": "add",
+					"name": "add",
+					"target": "add"
+				}
+				
+			],
+			"targets": {				
+				"notFound":{
+					"viewName":"NotFound",
+					"transition":"show"
+				},
+				"app":{
+					"viewPath": "com.liu.CRUD.view",
+					"viewName": "App",				
+					"viewLevel": 0
+				},
+				"detail":{
+					"viewPath": "com.liu.CRUD.view",
+					"viewName": "Detail",				
+					"viewLevel": 1
+				},
+				"add":{
+					"viewPath": "com.liu.CRUD.view",
+					"viewName": "Add",				
+					"viewLevel": 1
+				}							
+			}
+		}
+	}
+}

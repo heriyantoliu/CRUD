@@ -1,0 +1,57 @@
+<mvc:View
+	controllerName="com.liu.CRUD.controller.App"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic"
+	busyIndicatorDelay="0">
+	<App
+		id="app">
+		<pages>
+			<semantic:FullscreenPage
+				id="pages"				
+				title="List Carrier">
+				<semantic:content>
+					<Table
+						id="table"				
+						class="sapUiResponsiveMargin"
+						growing="true"						
+						noDataText="No Data"						
+						width="auto"
+						items="{/FlightCarrierSet}">
+						<headerToolbar>
+							<Toolbar>
+								<Button	icon="sap-icon://add" press="onAdd" />						
+							</Toolbar>
+						</headerToolbar>				
+						<columns>
+							<Column id="nameColumn">
+								<Text
+									id="nameColumnTitle"
+									text="Carrier ID"/>
+							</Column>
+							<Column id="unitNumberColumn">
+								<Text
+									id="unitNumberColumnTitle"
+									text="Carrier Name"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem
+								press="onPress"
+								type="Navigation">
+								<cells>
+									<ObjectIdentifier
+										title="{Carrid}"/>
+								</cells>
+								<cells>
+									<ObjectIdentifier
+										title="{Carrname}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</semantic:content>		
+			</semantic:FullscreenPage>
+		</pages>
+	</App>
+</mvc:View>
