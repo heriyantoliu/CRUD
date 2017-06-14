@@ -1,7 +1,8 @@
 sap.ui.define([
 	"com/liu/CRUD/controller/BaseController",
-	"sap/m/MessageToast"
-], function (BaseController, MessageToast) {
+	"sap/m/MessageToast",
+	"sap/m/MessageBox"
+], function (BaseController, MessageToast, MessageBox) {
 	"use strict";
 	return BaseController.extend("com.liu.CRUD.controller.Detail", {
 		onInit: function () {
@@ -71,6 +72,22 @@ sap.ui.define([
 					MessageBox.error(message);
 				}
 			});
+		},
+		
+		onDelete: function (oEvent){
+			var sPath = this.getView().getBindingContext().sPath;
+			var self = this;
+			this.getView().getModel().remove(sPath,{
+				success: function  (oData,oResponse){
+					self.onNavBack();
+					var sMsg = 'Delete Successfull';
+					MessageToast.show(sMsg);
+				},
+				error: function (oError){
+					var message = jQuery.parseJSON(oError.responseText).error.message.value;
+					MessageBox.error(message);
+				}
+			})
 		}
 		
 	});
